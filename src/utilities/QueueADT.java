@@ -39,4 +39,15 @@ public interface QueueADT<E> {
      * @return true if the queue is empty, false otherwise
      */
     boolean isEmpty();
+    
+    /**
+	 * Returns an iterator over the elements in this list, in proper sequence.
+	 * 
+	 * @return An iterator over the elements in this list, in proper sequence.
+	 * 			NB: The return is of type 
+	 * 			<code>linearUtilities.Iterator<E></code>,
+	 * 			not <code>java.util.Iterator</code>.
+	 */
+	public Iterator<E> iterator();	
+
 }
