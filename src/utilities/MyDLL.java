@@ -1,6 +1,5 @@
 package utilities;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MyDLL<E> implements ListADT<E> {
@@ -182,7 +181,8 @@ public class MyDLL<E> implements ListADT<E> {
     @Override
     public E[] toArray(E[] toHold) throws NullPointerException {
         if (toHold.length < size) {
-            toHold = Arrays.copyOf(toHold, size);
+            // Create a new array of the runtime type with the specified size
+            toHold = (E[]) java.lang.reflect.Array.newInstance(toHold.getClass().getComponentType(), size);
         }
         MyDLLNode<E> current = head;
         int index = 0;

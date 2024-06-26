@@ -1,7 +1,6 @@
 package utilities;
 
 import java.util.NoSuchElementException;
-import java.util.Arrays;
 
 public class MyStack<E> implements StackADT<E> {
 
@@ -56,11 +55,16 @@ public class MyStack<E> implements StackADT<E> {
         return new MyStackIterator();
     }
 
+    @SuppressWarnings("unchecked")
     private void ensureCapacity(int minCapacity) {
         int oldCapacity = elements.length;
         if (minCapacity > oldCapacity) {
             int newCapacity = oldCapacity + (oldCapacity >> 1); // Increase capacity by 50%
-            elements = Arrays.copyOf(elements, newCapacity);
+            E[] newElements = (E[]) new Object[newCapacity];
+            for (int i = 0; i < size; i++) {
+                newElements[i] = elements[i];
+            }
+            elements = newElements;
         }
     }
 
@@ -85,4 +89,5 @@ public class MyStack<E> implements StackADT<E> {
             return elements[cursor--];
         }
     }
+
 }

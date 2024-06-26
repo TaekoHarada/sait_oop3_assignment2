@@ -1,7 +1,6 @@
 package utilities;
 
 import java.util.NoSuchElementException;
-import java.util.Arrays;
 
 public class MyQueue<E> implements QueueADT<E> {
 
@@ -68,8 +67,18 @@ public class MyQueue<E> implements QueueADT<E> {
     private void ensureCapacity(int minCapacity) {
         if (minCapacity > elements.length) {
             int newCapacity = elements.length + (elements.length >> 1); // Increase capacity by 50%
-            elements = Arrays.copyOf(elements, newCapacity);
+            resizeArray(newCapacity);
         }
+    }
+
+    private void resizeArray(int newCapacity) {
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[(front + i) % elements.length];
+        }
+        elements = newElements;
+        front = 0;
+        rear = size - 1;
     }
 
     private class MyQueueIterator implements Iterator<E> {
